@@ -1,0 +1,11 @@
+version: '3'
+services:
+  trusty:
+    build:
+      context: .
+      dockerfile: Dockerfile.trusty
+  alpine:
+    build:
+      context: .
+      dockerfile: Dockerfile.alpine
+

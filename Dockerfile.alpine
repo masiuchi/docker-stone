@@ -1,0 +1,14 @@
+FROM alpine
+
+RUN apk add --no-cache musl-dev openssl-dev\
+ && apk add --no-cache --virtual .build-deps make gcc cvs\
+ && cvs -d :pserver:anonymous@cvs.osdn.net:/cvsroot/stone co stone\
+ && cd /stone\
+ && make linux-ssl FLAGS=-D_GNU_SOURCE\
+ && mv stone /usr/local/bin/\
+ && cd ..\
+ && rm -rf /stone/\
+ && apk del --purge .build-deps
+
+ENTRYPOINT ["stone"]
+
